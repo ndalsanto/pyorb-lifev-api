@@ -1,26 +1,40 @@
 CMAKE_MINIMUM_REQUIRED(VERSION 3.9)
 
+project(lifev-pyorb VERSION 1.0.0 DESCRIPTION "lifev-pyorb description")
+
 # required for unit testing using CMake's ctest command
 include(CTest)
 enable_testing()
-
-project(lifev-pyorb VERSION 1.0.0 DESCRIPTION "lifev-pyorb description")
 
 include(CheckIncludeFile)
 include(CheckIncludeFileCXX)
 include(CheckIncludeFiles)
 include(ExternalProject)
 
-
-set(CMAKE_BUILD_TYPE Release)
+# set(CMAKE_BUILD_TYPE Release)
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/include)
-include(TPLs/lifev.cmake)
+
+# INCLUDE_DIRECTORIES(${TPL_LifeV_INCLUDE_DIRS})
+# LINK_DIRECTORIES(${TPL_LifeV_LIBRARY_DIRS})
 
 add_subdirectory(include)
-add_subdirectory(TPLs)
 add_subdirectory(sources)
 add_subdirectory(test)
 
-add_library(lifev-pyorb SHARED sources/test.cpp )
+set(HEADER
+    ${HEADER_FILES}
+  )
+
+set(SOURCE
+    ${SOURCE_FILES}
+  )
+
+add_library(tessst SHARED ${SOURCE})
+
+
+
+# install(TARGETS tessst DESTINATION lib)
+# install(FILES ${HEADER} DESTINATION include)
+
 
 
