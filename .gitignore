@@ -1,4 +1,5 @@
-*/CMakeFiles/*
+*CMakeFiles/*
 *.cmake
 *.tcl
-
+Makefile
+*CMakeCache.txt
