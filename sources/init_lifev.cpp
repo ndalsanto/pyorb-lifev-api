@@ -10,13 +10,13 @@
 namespace PyOrbLifeV
 {
 
-LifeVInitializer::
-LifeVInitializer( )
+LifeVSimulator::
+LifeVSimulator( )
 {
 }
 
 int
-LifeVInitializer::
+LifeVSimulator::
 initialize( FemSpecifics& _femSpecifics )
 {
     MPI_Comm * external_mpi_communicator = (MPI_Comm * ) _femSpecifics.external_communicator;
@@ -34,7 +34,7 @@ initialize( FemSpecifics& _femSpecifics )
 }
 
 int
-LifeVInitializer::
+LifeVSimulator::
 finalize()
 {
 }

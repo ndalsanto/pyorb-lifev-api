@@ -30,11 +30,11 @@ int main (int argc, char **argv)
     my_fem_specs.A = A;
     my_fem_specs.f = f;
 
-    PyOrbLifeV::LifeVInitializer my_lifev_initializer;
+    PyOrbLifeV::LifeVSimulator my_lifev_simulator;
 
-    my_lifev_initializer.initialize( my_fem_specs );
+    my_lifev_simulator.initialize( my_fem_specs );
 
-    my_lifev_initializer.finalize( );
+    my_lifev_simulator.finalize( );
 
     return 0;
 }

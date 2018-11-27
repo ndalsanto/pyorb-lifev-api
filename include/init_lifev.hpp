@@ -31,14 +31,14 @@ struct FemSpecifics
       double * f;
 };
 
-class LifeVInitializer
+class LifeVSimulator
 {
 
 public:
 
-    LifeVInitializer( );
+    LifeVSimulator( );
 
-    ~LifeVInitializer( ) { };
+    ~LifeVSimulator( ) { };
 
     int initialize( FemSpecifics& _femSpecifics );
 
