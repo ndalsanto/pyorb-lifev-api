@@ -31,20 +31,19 @@ struct FemSpecifics
       double * f;
 };
 
-class InitLifeV
+class LifeVInitializer
 {
 
 public:
 
-    InitLifeV( );
+    LifeVInitializer( );
 
-    ~InitLifeV( ) { };
+    ~LifeVInitializer( ) { };
 
     int initialize( FemSpecifics& _femSpecifics );
 
     int finalize();
 
-    int M_a;
     std::shared_ptr<GetPot> M_dataFile;
     std::shared_ptr< Epetra_Comm > M_comm;
 };

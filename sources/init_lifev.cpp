@@ -10,15 +10,13 @@
 namespace PyOrbLifeV
 {
 
-InitLifeV::
-InitLifeV( )
-:
-M_a(1)
+LifeVInitializer::
+LifeVInitializer( )
 {
 }
 
 int
-InitLifeV::
+LifeVInitializer::
 initialize( FemSpecifics& _femSpecifics )
 {
     MPI_Comm * external_mpi_communicator = (MPI_Comm * ) _femSpecifics.external_communicator;
@@ -33,15 +31,10 @@ initialize( FemSpecifics& _femSpecifics )
 
     std::string dataFileName( _femSpecifics.datafile_path );
     M_dataFile.reset( new GetPot( dataFileName ) );
-
-    
-
-
-
 }
 
 int
-InitLifeV::
+LifeVInitializer::
 finalize()
 {
 }
