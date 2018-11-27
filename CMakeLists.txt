@@ -15,15 +15,18 @@ include(ExternalProject)
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/include)
 
 SET( INCLUDED_HEADERS
-    ${MPI_INCLUDE_DIRS}
-    ${Trilinos_INCLUDE_DIRS}
-    ${TPL_LifeV_INCLUDE_DIRS} )
+    ${TPL_MPI_INCLUDE_DIRS}
+    ${TPL_Trilinos_INCLUDE_DIRS}
+    ${TPL_LifeV_INCLUDE_DIRS}
+    ${TPL_HDF5_INCLUDE_DIRS}
+     )
 
 SET( LINKED_LIBRARIES_DIRS
-   ${MPI_LIBRARY_DIRS}
-   ${MPI_LIBRARY_DIRS}
-   ${Trilinos_LIBRARY_DIRS}
+   ${TPL_MPI_LIBRARY_DIRS}
+   ${TPL_MPI_LIBRARY_DIRS}
+   ${TPL_Trilinos_LIBRARY_DIRS}
    ${TPL_LifeV_LIBRARY_DIRS}
+   ${TPL_HDF5_LIBRARY_DIRS}
     )
 
 SET( LINKED_LIBRARIES
@@ -31,6 +34,10 @@ SET( LINKED_LIBRARIES
      libmpi_cxx.so
      liblifevcore.so
      liblifeveta.so
+     liblifeveta.so
+     libepetra.so
+     libepetraext.so
+     libhdf5.so
       )
 
 include_directories( ${INCLUDED_HEADERS} )
