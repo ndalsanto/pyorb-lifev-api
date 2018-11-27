@@ -14,15 +14,30 @@ include(ExternalProject)
 # set(CMAKE_BUILD_TYPE Release)
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/include)
 
-SET( INCLUDED_HEADERS ${MPI_INCLUDE_DIRS} ${Trilinos_INCLUDE_DIRS}  ${TPL_LifeV_INCLUDE_DIRS} )
-SET( LINKED_LIBRARIES ${MPI_LIBRARY_DIRS}/libmpi.so ${MPI_LIBRARY_DIRS}/libmpi_cxx.so )
+SET( INCLUDED_HEADERS
+    ${MPI_INCLUDE_DIRS}
+    ${Trilinos_INCLUDE_DIRS}
+    ${TPL_LifeV_INCLUDE_DIRS} )
+
+SET( LINKED_LIBRARIES_DIRS
+   ${MPI_LIBRARY_DIRS}
+   ${MPI_LIBRARY_DIRS}
+   ${Trilinos_LIBRARY_DIRS}
+   ${TPL_LifeV_LIBRARY_DIRS}
+    )
+
+SET( LINKED_LIBRARIES
+     libmpi.so
+     libmpi_cxx.so
+     liblifevcore.so
+     liblifeveta.so
+      )
 
 include_directories( ${INCLUDED_HEADERS} )
-
+link_directories( ${LINKED_LIBRARIES_DIRS} )
 
 add_subdirectory(include)
 add_subdirectory(sources)
-add_subdirectory(test)
 
 set(HEADER
     ${HEADER_FILES}
@@ -33,5 +48,10 @@ set(SOURCE
   )
 
 add_library(tessst SHARED ${SOURCE} )
+target_link_libraries(tessst ${LINKED_LIBRARIES} )
 
-SET(LIFEV_LIBRARIES_PATHS ${TPL_LifeV_LIBRARY_DIRS}/lib/liblifevcore.so )
+
+add_subdirectory(test)
+
+
+# SET(LIFEV_LIBRARIES_PATHS ${TPL_LifeV_LIBRARY_DIRS}/lib/liblifevcore.so )
