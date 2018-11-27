@@ -16,6 +16,8 @@
 #endif
 #include <lifev/core/LifeV.hpp>
 #include <lifev/core/filter/GetPot.hpp>
+#include <lifev/core/mesh/MeshPartitioner.hpp>
+#include <lifev/core/mesh/RegionMesh.hpp>
 
 namespace PyOrbLifeV
 {
@@ -40,12 +42,20 @@ public:
 
     ~LifeVSimulator( ) { };
 
+    // methods to initialize/finalize LifeV
     int initialize( FemSpecifics& _femSpecifics );
 
     int finalize();
 
-    std::shared_ptr<GetPot> M_dataFile;
-    std::shared_ptr< Epetra_Comm > M_comm;
+    // methods to run a LifeV simulation
+    int initialize_simulation( );
+
+    // members to initialize LifeV
+    std::shared_ptr< Epetra_Comm >                      M_comm;
+
+    // members to initialize a LifeV simulation
+    std::shared_ptr<GetPot>                                           M_dataFile;
+    std::shared_ptr< LifeV::RegionMesh< LifeV::LinearTetra > >        M_localMeshPtr;
 };
 
 }

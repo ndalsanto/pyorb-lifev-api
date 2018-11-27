@@ -34,6 +34,8 @@ int main (int argc, char **argv)
 
     my_lifev_simulator.initialize( my_fem_specs );
 
+    
+
     my_lifev_simulator.finalize( );
 
     return 0;

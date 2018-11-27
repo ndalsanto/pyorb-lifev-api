@@ -6,6 +6,7 @@
 #include "init_lifev.hpp"
 #include <lifev/core/LifeV.hpp>
 #include <mpi.h>
+#include <lifev/core/mesh/MeshData.hpp>
 
 namespace PyOrbLifeV
 {
@@ -39,7 +40,24 @@ finalize()
 {
 }
 
+int
+LifeVSimulator::
+initialize_simulation( )
+{
+    std::shared_ptr< LifeV::RegionMesh< LifeV::LinearTetra > > fullMeshPtr ( new LifeV::RegionMesh< LifeV::LinearTetra > ( M_comm ) );
 
+    LifeV::MeshData meshData;
+    meshData.setup ( *M_dataFile, "mesh");
+    readMesh (*fullMeshPtr, meshData);
+
+    LifeV::MeshPartitioner< LifeV::RegionMesh< LifeV::LinearTetra > > meshPart;
+
+    meshPart.doPartition ( fullMeshPtr, M_comm );
+    M_localMeshPtr = meshPart.meshPartition();
+
+    // Clearing global mesh
+    fullMeshPtr.reset();
+}
 
 
 }
