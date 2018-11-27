@@ -18,6 +18,8 @@
 #include <lifev/core/filter/GetPot.hpp>
 #include <lifev/core/mesh/MeshPartitioner.hpp>
 #include <lifev/core/mesh/RegionMesh.hpp>
+#include <lifev/eta/fem/ETFESpace.hpp>
+#include <lifev/core/fem/BCManage.hpp>
 
 namespace PyOrbLifeV
 {
@@ -56,6 +58,8 @@ public:
     // members to initialize a LifeV simulation
     std::shared_ptr<GetPot>                                           M_dataFile;
     std::shared_ptr< LifeV::RegionMesh< LifeV::LinearTetra > >        M_localMeshPtr;
+    std::shared_ptr< LifeV::FESpace< LifeV::RegionMesh< LifeV::LinearTetra >, LifeV::MapEpetra > >            M_uFESpace;
+    std::shared_ptr< LifeV::ETFESpace< LifeV::RegionMesh< LifeV::LinearTetra >, LifeV::MapEpetra, 3, 1 > >    M_ETuFESpace;
 };
 
 }

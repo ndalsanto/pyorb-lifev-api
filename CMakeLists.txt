@@ -37,6 +37,7 @@ SET( LINKED_LIBRARIES
      liblifeveta.so
      libepetra.so
      libepetraext.so
+     libteuchoscore.so
      libhdf5.so
       )
 

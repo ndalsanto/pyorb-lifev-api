@@ -44,19 +44,28 @@ int
 LifeVSimulator::
 initialize_simulation( )
 {
-    std::shared_ptr< LifeV::RegionMesh< LifeV::LinearTetra > > fullMeshPtr ( new LifeV::RegionMesh< LifeV::LinearTetra > ( M_comm ) );
+    typedef LifeV::RegionMesh< LifeV::LinearTetra >                 mesh_Type;
+    typedef LifeV::FESpace< mesh_Type, LifeV::MapEpetra >           FESpace_Type;
+    typedef LifeV::ETFESpace< mesh_Type, LifeV::MapEpetra, 3, 1 >   uSpaceETA_Type;
+
+    std::shared_ptr< mesh_Type > fullMeshPtr ( new mesh_Type ( M_comm ) );
 
     LifeV::MeshData meshData;
     meshData.setup ( *M_dataFile, "mesh");
     readMesh (*fullMeshPtr, meshData);
 
-    LifeV::MeshPartitioner< LifeV::RegionMesh< LifeV::LinearTetra > > meshPart;
+    LifeV::MeshPartitioner< mesh_Type > meshPart;
 
     meshPart.doPartition ( fullMeshPtr, M_comm );
     M_localMeshPtr = meshPart.meshPartition();
 
     // Clearing global mesh
     fullMeshPtr.reset();
+
+    // Defining finite elements standard and ET spaces
+    M_uFESpace.reset( new FESpace_Type ( M_localMeshPtr, (*M_dataFile)( "finite_element/degree", "P1" ), 1, M_comm ) );
+    M_ETuFESpace.reset( new uSpaceETA_Type ( M_localMeshPtr, & ( M_uFESpace->refFE() ), & ( M_uFESpace->fe().geoMap() ), M_comm ) );
+
 }
 
 
