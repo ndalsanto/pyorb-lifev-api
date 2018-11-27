@@ -14,8 +14,11 @@ include(ExternalProject)
 # set(CMAKE_BUILD_TYPE Release)
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/include)
 
-SET( LINKED_HEADERS ${MPI_INCLUDE_DIRS} ${Trilinos_INCLUDE_DIRS}  ${TPL_LifeV_INCLUDE_DIRS} )
+SET( INCLUDED_HEADERS ${MPI_INCLUDE_DIRS} ${Trilinos_INCLUDE_DIRS}  ${TPL_LifeV_INCLUDE_DIRS} )
 SET( LINKED_LIBRARIES ${MPI_LIBRARY_DIRS}/libmpi.so ${MPI_LIBRARY_DIRS}/libmpi_cxx.so )
+
+include_directories( ${INCLUDED_HEADERS} )
+
 
 add_subdirectory(include)
 add_subdirectory(sources)
@@ -29,14 +32,6 @@ set(SOURCE
     ${SOURCE_FILES}
   )
 
-add_library(tessst SHARED ${SOURCE})
+add_library(tessst SHARED ${SOURCE} )
 
 SET(LIFEV_LIBRARIES_PATHS ${TPL_LifeV_LIBRARY_DIRS}/lib/liblifevcore.so )
-
-add_library(LifeV SHARED IMPORTED LIFEV_LIBRARIES_PATHS)
-
-message(${LIFEV_LIBRARIES_PATHS})
-
-# install(TARGETS tessst DESTINATION lib)
-# install(FILES ${HEADER} DESTINATION include)
-
