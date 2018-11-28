@@ -88,6 +88,16 @@ finalize()
 
 int
 LifeVSimulator::
+get_fem_dimension( )
+{
+    LifeV::VectorEpetra f( M_ETuFESpace->map(), LifeV::Unique );
+    int my_size = f.epetraVector().MyLength( );
+
+    return my_size;
+}
+
+int
+LifeVSimulator::
 initialize_simulation( )
 {
     typedef LifeV::RegionMesh< LifeV::LinearTetra >                 mesh_Type;
@@ -127,7 +137,7 @@ perform_simulation( double * _param )
     mu3 = _param[2];
 
     std::shared_ptr< LifeV::MatrixEpetra< LifeV::Real > > Ah( new LifeV::MatrixEpetra< LifeV::Real >( M_ETuFESpace->map(), 100 ) );
-    std::shared_ptr< LifeV::VectorEpetra > fh( new LifeV::VectorEpetra( M_ETuFESpace->map(), LifeV::Unique ) );
+    std::shared_ptr< LifeV::VectorEpetra > fh( new LifeV::VectorEpetra( M_ETuFESpace->map(), LifeV::Repeated ) );
     Ah->zero( );
     fh->zero();
 

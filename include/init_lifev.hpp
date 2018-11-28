@@ -54,6 +54,8 @@ public:
 
     int perform_simulation( double * _param );
 
+    int get_fem_dimension( );
+
     // members to initialize LifeV
     std::shared_ptr< Epetra_Comm >                      M_comm;
 
