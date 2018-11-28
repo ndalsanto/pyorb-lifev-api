@@ -15,9 +15,9 @@ public:
 
     return_Type operator() ( const LifeV::VectorSmall<3> spaceCoordinates )
     {
-        LifeV::Real & x = spaceCoordinates[0];
-        LifeV::Real & y = spaceCoordinates[1];
-        LifeV::Real & z = spaceCoordinates[2];
+        LifeV::Real x = spaceCoordinates[0];
+        LifeV::Real y = spaceCoordinates[1];
+        LifeV::Real z = spaceCoordinates[2];
 
         return myFunction( 0, x, y, z, 0 );
     }
