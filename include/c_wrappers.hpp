@@ -3,6 +3,10 @@
 @date 27-11-2018
 */
 
+#ifndef __PYORB_LIFEV_C_WRAPPERS__
+#define __PYORB_LIFEV_C_WRAPPERS__
+
+#include "init_lifev.hpp"
 
 namespace PyOrbLifeV
 {
@@ -14,3 +18,5 @@ extern "C" {
 }
 
 }
+
+#endif
