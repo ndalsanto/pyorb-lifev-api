@@ -52,7 +52,7 @@ public:
     // methods to run a LifeV simulation
     int initialize_simulation( );
 
-    int perform_simulation( double const * const _param );
+    int perform_simulation( double * _param );
 
     // members to initialize LifeV
     std::shared_ptr< Epetra_Comm >                      M_comm;
@@ -62,6 +62,7 @@ public:
     std::shared_ptr< LifeV::RegionMesh< LifeV::LinearTetra > >        M_localMeshPtr;
     std::shared_ptr< LifeV::FESpace< LifeV::RegionMesh< LifeV::LinearTetra >, LifeV::MapEpetra > >            M_uFESpace;
     std::shared_ptr< LifeV::ETFESpace< LifeV::RegionMesh< LifeV::LinearTetra >, LifeV::MapEpetra, 3, 1 > >    M_ETuFESpace;
+    std::shared_ptr< LifeV::VectorEpetra > M_u;
 };
 
 }
