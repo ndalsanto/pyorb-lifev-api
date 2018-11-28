@@ -56,6 +56,15 @@ public:
 
     int get_fem_dimension( );
 
+    int build_stiffness_matrix( double * _param );
+
+    int build_fem_vector( double * _param );
+
+    std::shared_ptr< LifeV::VectorEpetra > get_solution( )
+    {
+        return M_u;
+    }
+
     // members to initialize LifeV
     std::shared_ptr< Epetra_Comm >                      M_comm;
 
@@ -65,6 +74,8 @@ public:
     std::shared_ptr< LifeV::FESpace< LifeV::RegionMesh< LifeV::LinearTetra >, LifeV::MapEpetra > >            M_uFESpace;
     std::shared_ptr< LifeV::ETFESpace< LifeV::RegionMesh< LifeV::LinearTetra >, LifeV::MapEpetra, 3, 1 > >    M_ETuFESpace;
     std::shared_ptr< LifeV::VectorEpetra > M_u;
+    std::shared_ptr< LifeV::VectorEpetra > M_f;
+    std::shared_ptr< LifeV::MatrixEpetra< LifeV::Real > > M_A;
 };
 
 }

@@ -130,16 +130,15 @@ initialize_simulation( )
 
 int
 LifeVSimulator::
-perform_simulation( double * _param )
+build_stiffness_matrix( double * _param )
 {
     mu1 = _param[0];
     mu2 = _param[1];
     mu3 = _param[2];
 
-    std::shared_ptr< LifeV::MatrixEpetra< LifeV::Real > > Ah( new LifeV::MatrixEpetra< LifeV::Real >( M_ETuFESpace->map(), 100 ) );
-    std::shared_ptr< LifeV::VectorEpetra > fh( new LifeV::VectorEpetra( M_ETuFESpace->map(), LifeV::Repeated ) );
-    Ah->zero( );
-    fh->zero();
+    M_A.reset( new LifeV::MatrixEpetra< LifeV::Real >( M_ETuFESpace->map(), 100 ) );
+
+    M_A->zero( );
 
     {
         using namespace std::placeholders;
@@ -158,9 +157,23 @@ perform_simulation( double * _param )
                     M_ETuFESpace,
                     value(1.0) * eval( diffusionFunctor, X ) * dot( grad( phi_j ), grad( phi_i ) )
                     )
-                    >> Ah;
+                    >> M_A;
         }
     }
+
+    M_A->globalAssemble( );
+}
+
+int
+LifeVSimulator::
+build_fem_vector( double * _param )
+{
+    mu1 = _param[0];
+    mu2 = _param[1];
+    mu3 = _param[2];
+
+    M_f.reset( new LifeV::VectorEpetra( M_ETuFESpace->map(), LifeV::Repeated ) );
+    M_f->zero();
 
     {
         using namespace LifeV;
@@ -172,11 +185,18 @@ perform_simulation( double * _param )
                     M_ETuFESpace,
                     value(1.0) * phi_i
                 )
-                >> fh;
+                >> M_f;
     }
 
-    fh->globalAssemble( );
-    Ah->globalAssemble( );
+    M_f->globalAssemble( );
+}
+
+int
+LifeVSimulator::
+perform_simulation( double * _param )
+{
+    build_stiffness_matrix( _param );
+    build_fem_vector( _param );
 
     M_u.reset( new LifeV::VectorEpetra ( M_uFESpace->map(), LifeV::Unique ) );
     M_u->zero();
@@ -194,14 +214,14 @@ perform_simulation( double * _param )
     bcHandler.addBC( "Bottom", BOTTOM, LifeV::Essential, LifeV::Full, ZeroBC, 1 );
 
     bcHandler.bcUpdate( *M_uFESpace->mesh(), M_uFESpace->feBd(), M_uFESpace->dof() );
-    LifeV::bcManage ( *Ah, *fh, *M_uFESpace->mesh(), M_uFESpace->dof(), bcHandler, M_uFESpace->feBd(), 1.0, 0.0 );
+    LifeV::bcManage ( *M_A, *M_f, *M_uFESpace->mesh(), M_uFESpace->dof(), bcHandler, M_uFESpace->feBd(), 1.0, 0.0 );
 
-    fh->globalAssemble( );
-    Ah->globalAssemble( );
+    M_f->globalAssemble( );
+    M_A->globalAssemble( );
 
     LifeV::LinearSolver linearSolver ( M_comm );
 
-    linearSolver.setOperator( Ah );
+    linearSolver.setOperator( M_A );
 
     Teuchos::RCP< Teuchos::ParameterList > aztecList = Teuchos::rcp ( new Teuchos::ParameterList );
     aztecList = Teuchos::getParametersFromXmlFile ( "SolverParamList.xml" );
@@ -215,7 +235,7 @@ perform_simulation( double * _param )
     precPtr.reset ( precRawPtr );
 
     linearSolver.setPreconditioner ( precPtr );
-    linearSolver.setRightHandSide( fh );
+    linearSolver.setRightHandSide( M_f );
     linearSolver.solve( M_u );
 }
 
