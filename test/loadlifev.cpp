@@ -48,6 +48,11 @@ int main ( int argc, char** argv )
 
     my_lifev_simulator.initialize( my_fem_specs );
 
+    // random value of parameter for testing thermal block problem
+    double parameter[3] = { 1.5, 2.5, 3.5 };
+
+    my_lifev_simulator.perform_simulation( parameter );
+
     std::cout << "Finalizing LifeVSimulator " << std::endl;
 
     my_lifev_simulator.finalize( );
