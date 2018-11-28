@@ -24,12 +24,12 @@
 namespace PyOrbLifeV
 {
 
-struct FemSpecifics
+class FemSpecifics
 {
-//public:
+public:
       char * model;
       char * datafile_path;
-      void * external_communicator;
+      MPI_Comm * external_communicator;
       double * u;
       double * A;
       double * f;
@@ -51,6 +51,8 @@ public:
 
     // methods to run a LifeV simulation
     int initialize_simulation( );
+
+    int perform_simulation( double const * const _param );
 
     // members to initialize LifeV
     std::shared_ptr< Epetra_Comm >                      M_comm;
