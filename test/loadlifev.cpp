@@ -59,9 +59,9 @@ int main ( int argc, char** argv )
 
     std::cout << "Exiting MPI " << std::endl;
 
-    #ifdef HAVE_MPI
-        MPI_Finalize();
-    #endif
+#ifdef HAVE_MPI
+    MPI_Finalize();
+#endif
 
     return ( EXIT_SUCCESS );
 }
