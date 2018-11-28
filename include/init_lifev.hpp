@@ -37,7 +37,6 @@ public:
 
 class LifeVSimulator
 {
-
 public:
 
     LifeVSimulator( );
@@ -56,14 +55,24 @@ public:
 
     int get_fem_dimension( );
 
-    int build_stiffness_matrix( double * _param );
+    std::shared_ptr< LifeV::MatrixEpetra< LifeV::Real > > get_stiffness( )
+    {
+        return M_A;
+    }
 
-    int build_fem_vector( double * _param );
+    std::shared_ptr< LifeV::VectorEpetra > get_rhs( )
+    {
+        return M_f;
+    }
 
     std::shared_ptr< LifeV::VectorEpetra > get_solution( )
     {
         return M_u;
     }
+
+    int build_stiffness_matrix( double * _param );
+
+    int build_fem_vector( double * _param );
 
     // members to initialize LifeV
     std::shared_ptr< Epetra_Comm >                      M_comm;
