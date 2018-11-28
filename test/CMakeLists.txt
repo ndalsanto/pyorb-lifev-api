@@ -1,4 +1,6 @@
 add_executable(loadlifev loadlifev.cpp)
-# target_include_directories(loadlifev PUBLIC ${INCLUDED_HEADERS})
-target_link_libraries(loadlifev ${PROJECT_BINARY_DIR}/libtessst.so ${LINKED_LIBRARIES} )
+add_executable(use_lifev_wrappers use_lifev_wrappers.cpp)
+target_link_libraries(loadlifev ${PROJECT_BINARY_DIR}/libpyorb-lifev-api.so ${LINKED_LIBRARIES} )
+target_link_libraries(use_lifev_wrappers ${PROJECT_BINARY_DIR}/libpyorb-lifev-api.so ${LINKED_LIBRARIES} )
 add_test(loadlifev_test loadlifev)
+add_test(use_lifev_wrappers_test use_lifev_wrappers)

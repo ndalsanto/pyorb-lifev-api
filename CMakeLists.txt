@@ -55,8 +55,8 @@ set(SOURCE
     ${SOURCE_FILES}
   )
 
-add_library(tessst SHARED ${SOURCE} )
-target_link_libraries(tessst ${LINKED_LIBRARIES} )
+add_library(pyorb-lifev-api SHARED ${SOURCE} )
+target_link_libraries(pyorb-lifev-api ${LINKED_LIBRARIES} )
 
 
 add_subdirectory(test)
