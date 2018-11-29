@@ -22,7 +22,7 @@ MPI_LIB_DIRECTORY=${LIBRARIES_BASE_DIRECTORY}openmpi/lib/
 
 
 LIFEV_INSTALLATION=<yout lifeV installation>
-LIFEV_4_PYORB_DIR=<build_installation>
+LIFEV_4_PYORB_DIR=<target build installation>
 
 cmake \
 -D TPL_LifeV_INCLUDE_DIRS:PATH=${LIFEV_INSTALLATION}include/ \
