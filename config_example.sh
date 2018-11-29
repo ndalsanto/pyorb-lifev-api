@@ -21,12 +21,12 @@ MPI_INCLUDE_DIRECTORY=${LIBRARIES_BASE_DIRECTORY}/openmpi/include/
 MPI_LIB_DIRECTORY=${LIBRARIES_BASE_DIRECTORY}openmpi/lib/
 
 
-
+LIFEV_INSTALLATION=<yout lifeV installation>
 LIFEV_4_PYORB_DIR=<build_installation>
 
 cmake \
--D TPL_LifeV_INCLUDE_DIRS:PATH="/usr/scratch/dalsanto/EPFL/DeepLearning/LifeV/lifev-env/lifev-epfl-install/include/" \
--D TPL_LifeV_LIBRARY_DIRS:PATH="/usr/scratch/dalsanto/EPFL/DeepLearning/LifeV/lifev-env/lifev-epfl-install/lib/" \
+-D TPL_LifeV_INCLUDE_DIRS:PATH=${LIFEV_INSTALLATION}include/ \
+-D TPL_LifeV_LIBRARY_DIRS:PATH=${LIFEV_INSTALLATION}lib/ \
 -D TPL_LAPACK_LIBRARIES:PATH=${LAPACK_LIBRARIES} \
 -D TPL_METIS_INCLUDE_DIRS:PATH=${METIS_INCLUDE_DIR} \
 -D TPL_METIS_LIBRARY_DIRS:PATH=${METIS_LIB_DIR} \
