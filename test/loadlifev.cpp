@@ -53,15 +53,26 @@ int main ( int argc, char** argv )
 
     my_lifev_simulator.perform_simulation( parameter );
 
+    double residual = my_lifev_simulator.compute_residual( );
+
+    std::cout << "The residual is " << residual << std::endl;
+
     std::cout << "Finalizing LifeVSimulator " << std::endl;
 
     my_lifev_simulator.finalize( );
 
-    std::cout << "Exiting MPI " << std::endl;
-
+    if( residual < 1.e-5 )
+    {
 #ifdef HAVE_MPI
-    MPI_Finalize();
+        MPI_Finalize();
 #endif
-
-    return ( EXIT_SUCCESS );
+        return ( EXIT_SUCCESS );
+    }
+    else
+    {
+#ifdef HAVE_MPI
+        MPI_Finalize();
+#endif
+        return ( EXIT_FAILURE );
+    }
 }

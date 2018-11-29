@@ -238,4 +238,20 @@ perform_simulation( double * _param )
     linearSolver.solve( M_u );
 }
 
+double
+LifeVSimulator::
+compute_residual( )
+{
+    std::shared_ptr<LifeV::VectorEpetra> residual;
+    residual.reset( new LifeV::VectorEpetra( M_ETuFESpace->map(), LifeV::Repeated ) );
+    residual->zero();
+
+    M_A->multiply( false, *M_u, *residual );
+    *residual *= -1.;
+    *residual += *M_f;
+
+    return residual->norm2( );
+}
+
+
 }

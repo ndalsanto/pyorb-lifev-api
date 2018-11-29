@@ -74,6 +74,8 @@ public:
 
     int build_fem_vector( double * _param );
 
+    double compute_residual( );
+
     // members to initialize LifeV
     std::shared_ptr< Epetra_Comm >                      M_comm;
 
