@@ -3,6 +3,8 @@
 rm CMakeCache.txt
 rm -rf CMakeFiles
 
+# if you have installed LifeV by following the instructions on www.lifev.org, LIBRARIES_BASE_DIRECTORY is a sub-directory of your lifev-env folder
+
 LIBRARIES_BASE_DIRECTORY=<base_directory_of_libraries>
 
 LAPACK_LIBRARIES=${LIBRARIES_BASE_DIRECTORY}OpenBLAS-0.2.20_installRelease/lib/
@@ -15,8 +17,8 @@ HDF5_INCLUDE_DIR=${LIBRARIES_BASE_DIRECTORY}hdf5-1.8.19_installRelease/include/
 HDF5_LIB_DIR=${LIBRARIES_BASE_DIRECTORY}hdf5-1.8.19_installRelease/lib/
 TRILINOS_INCLUDE_DIR=${LIBRARIES_BASE_DIRECTORY}trilinos-release-12-12-1_installRelease/include/
 TRILINOS_LIB_DIR=${LIBRARIES_BASE_DIRECTORY}trilinos-release-12-12-1_installRelease/lib/
-MPI_INCLUDE_DIRECTORY=${LIBRARIES_BASE_DIRECTORY}"/openmpi/include/"
-MPI_LIB_DIRECTORY=${LIBRARIES_BASE_DIRECTORY}"/openmpi/lib/"
+MPI_INCLUDE_DIRECTORY=${LIBRARIES_BASE_DIRECTORY}/openmpi/include/
+MPI_LIB_DIRECTORY=${LIBRARIES_BASE_DIRECTORY}openmpi/lib/
 
 
 
