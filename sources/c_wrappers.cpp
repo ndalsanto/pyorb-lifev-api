@@ -20,9 +20,6 @@ int solve_parameter( double * _param, FemSpecifics _femSpecifics, bool _computeO
     if( _computeOnlyDimension )
         return my_size;
 
-    // random value of parameter for testing thermal block problem
-    double parameter[3] = { 1.5, 2.5, 3.5 };
-
     my_lifev_simulator.perform_simulation( _param );
 
     double * _u = _femSpecifics.u;
@@ -33,7 +30,6 @@ int solve_parameter( double * _param, FemSpecifics _femSpecifics, bool _computeO
     double norm = my_lifev_simulator.get_solution( )->norm2( );
 
     std::cout << "Squared norm of solution in solve_parameter is " << norm*norm << std::endl;
-
 
     my_lifev_simulator.finalize( );
 }

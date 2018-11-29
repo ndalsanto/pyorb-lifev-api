@@ -125,7 +125,6 @@ initialize_simulation( )
     // Defining finite elements standard and ET spaces
     M_uFESpace.reset( new FESpace_Type ( M_localMeshPtr, (*M_dataFile)( "finite_element/degree", "P1" ), 1, M_comm ) );
     M_ETuFESpace.reset( new uSpaceETA_Type ( M_localMeshPtr, & ( M_uFESpace->refFE() ), & ( M_uFESpace->fe().geoMap() ), M_comm ) );
-
 }
 
 int
@@ -224,7 +223,7 @@ perform_simulation( double * _param )
     linearSolver.setOperator( M_A );
 
     Teuchos::RCP< Teuchos::ParameterList > aztecList = Teuchos::rcp ( new Teuchos::ParameterList );
-    aztecList = Teuchos::getParametersFromXmlFile ( "SolverParamList.xml" );
+    aztecList = Teuchos::getParametersFromXmlFile ( (*M_dataFile)( "solver/param_list_location", "SolverParamList.xml") );
 
     linearSolver.setParameters ( *aztecList );
 
