@@ -61,12 +61,14 @@ int main ( int argc, char** argv )
 
     my_lifev_simulator.finalize( );
 
+    return ( 0 );
+
     if( residual < 1.e-5 )
     {
 #ifdef HAVE_MPI
         MPI_Finalize();
 #endif
-        return ( EXIT_SUCCESS );
+        return ( 0 );
     }
     else
     {

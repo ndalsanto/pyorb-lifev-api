@@ -2,10 +2,6 @@ CMAKE_MINIMUM_REQUIRED(VERSION 3.9)
 
 project(lifev-pyorb VERSION 1.0.0 DESCRIPTION "lifev-pyorb description")
 
-# required for unit testing using CMake's ctest command
-include(CTest)
-enable_testing()
-
 include(CheckIncludeFile)
 include(CheckIncludeFileCXX)
 include(CheckIncludeFiles)
@@ -59,7 +55,4 @@ add_library(pyorb-lifev-api SHARED ${SOURCE} )
 target_link_libraries(pyorb-lifev-api ${LINKED_LIBRARIES} )
 
 
-add_subdirectory(test)
-
-
-# SET(LIFEV_LIBRARIES_PATHS ${TPL_LifeV_LIBRARY_DIRS}/lib/liblifevcore.so )
+add_subdirectory(examples)
