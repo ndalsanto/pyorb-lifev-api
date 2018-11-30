@@ -171,7 +171,10 @@ build_fem_vector( double * _param )
     mu2 = _param[1];
     mu3 = _param[2];
 
-    M_f.reset( new LifeV::VectorEpetra( M_ETuFESpace->map(), LifeV::Repeated ) );
+    std::shared_ptr< LifeV::VectorEpetra > f_repeated;
+    f_repeated.reset( new LifeV::VectorEpetra( M_ETuFESpace->map(), LifeV::Repeated ) );
+    f_repeated->zero();
+    M_f.reset( new LifeV::VectorEpetra( M_ETuFESpace->map(), LifeV::Unique ) );
     M_f->zero();
 
     {
@@ -184,10 +187,11 @@ build_fem_vector( double * _param )
                     M_ETuFESpace,
                     value(1.0) * phi_i
                 )
-                >> M_f;
+                >> f_repeated;
     }
 
-    M_f->globalAssemble( );
+    f_repeated->globalAssemble( );
+    *M_f += *f_repeated;
 }
 
 int
