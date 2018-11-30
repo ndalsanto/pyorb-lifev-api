@@ -1,5 +1,4 @@
 #include <iostream>
-#include "test_function.hpp"
 #include "init_lifev.hpp"
 
 #include <Epetra_ConfigDefs.h>
@@ -29,7 +28,7 @@ int main ( int argc, char** argv )
     PyOrbLifeV::FemSpecifics my_fem_specs;
 
     char * model = nullptr;
-    char datafile_path[9] = {'t', 'e', 's', 't', '/', 'd', 'a', 't', 'a' };
+    char datafile_path[13] = {'e', 'x', 'a', 'm', 'p', 'l', 'e', 's', '/', 'd', 'a', 't', 'a' };
     MPI_Comm * external_communicator = my_comm;
     double * u = nullptr;
     double * A = nullptr;

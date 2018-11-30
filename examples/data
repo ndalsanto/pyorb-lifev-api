@@ -7,7 +7,7 @@
     degree                       = P1
 
 [mesh]
-    mesh_dir					 = ./
+    mesh_dir					 = ./examples/
     mesh_file       			 = 4cube1.mesh
     mesh_type       			 = .mesh
     overlap                      = 0
@@ -20,7 +20,11 @@
 	mu3 						 = 15.3
 	mu4 						 = 12.2
 
-[prec]
+[../solver]
+    param_list_location = ./examples/SolverParamList.xml
+
+
+[../prec]
     prectype                     = Ifpack # Ifpack or ML
     displayList                  = false
 

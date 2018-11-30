@@ -30,7 +30,6 @@ SET( LINKED_LIBRARIES
      libmpi_cxx.so
      liblifevcore.so
      liblifeveta.so
-     liblifeveta.so
      libepetra.so
      libepetraext.so
      libteuchoscore.so
@@ -43,15 +42,7 @@ link_directories( ${LINKED_LIBRARIES_DIRS} )
 add_subdirectory(include)
 add_subdirectory(sources)
 
-set(HEADER
-    ${HEADER_FILES}
-  )
-
-set(SOURCE
-    ${SOURCE_FILES}
-  )
-
-add_library(pyorb-lifev-api SHARED ${SOURCE} )
+add_library(pyorb-lifev-api SHARED ${SOURCE_FILES} )
 target_link_libraries(pyorb-lifev-api ${LINKED_LIBRARIES} )
 
 
