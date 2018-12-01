@@ -4,7 +4,7 @@
 #-------------------------------------------------
 
 [finite_element]
-    degree                       = P1
+    degree    = P1
 
 [mesh]
     mesh_dir  = ./examples/
@@ -38,5 +38,5 @@
             reordering_type      = none #metis, rcm, none
             filter_singletons    = true
 
-		[../]
+    [../]
 [../]
