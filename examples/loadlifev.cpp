@@ -32,8 +32,6 @@ int main ( int argc, char** argv )
 
     PyOrbLifeV::LifeVSimulator my_lifev_simulator;
 
-    std::cout << "Initializing LifeVSimulator " << std::endl;
-
     my_lifev_simulator.initialize( my_fem_specs );
 
     // random value of parameter for testing thermal block problem
@@ -42,10 +40,6 @@ int main ( int argc, char** argv )
     my_lifev_simulator.perform_simulation( parameter );
 
     double residual = my_lifev_simulator.compute_residual( );
-
-    std::cout << "The residual is " << residual << std::endl;
-
-    std::cout << "Finalizing LifeVSimulator " << std::endl;
 
     my_lifev_simulator.finalize( );
 

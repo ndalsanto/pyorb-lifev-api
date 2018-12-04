@@ -66,13 +66,15 @@ initialize( FemSpecifics& _femSpecifics )
     MPI_Comm * external_mpi_communicator = ( MPI_Comm * ) _femSpecifics.external_communicator;
 
 #ifdef HAVE_MPI
-    std::cout << "LifeVSimulator::initialize communicator" << std::endl;
     M_comm.reset( new Epetra_MpiComm ( *( external_mpi_communicator ) ) );
 #else
     M_comm.reset( new Epetra_SerialComm );
 #endif
 
-    std::cout << "LifeVSimulator::initialize M_dataFile" << std::endl;
+    M_verbose = M_comm->MyPID( );
+
+    if( M_verbose )
+        std::cout << "LifeVSimulator::initialize M_dataFile" << std::endl;
 
     std::string dataFileName( _femSpecifics.datafile_path );
     M_dataFile.reset( new GetPot( dataFileName ) );
@@ -104,7 +106,8 @@ initialize_simulation( )
     typedef LifeV::FESpace< mesh_Type, LifeV::MapEpetra >           FESpace_Type;
     typedef LifeV::ETFESpace< mesh_Type, LifeV::MapEpetra, 3, 1 >   uSpaceETA_Type;
 
-    std::cout << "LifeVSimulator::initialize_simulation reading mesh" << std::endl;
+    if( M_verbose )
+        std::cout << "LifeVSimulator::initialize_simulation reading mesh" << std::endl;
 
     std::shared_ptr< mesh_Type > fullMeshPtr ( new mesh_Type ( M_comm ) );
 
@@ -120,7 +123,8 @@ initialize_simulation( )
     // Clearing global mesh
     fullMeshPtr.reset();
 
-    std::cout << "LifeVSimulator::initialize_simulation creating fe spaces" << std::endl;
+    if( M_verbose )
+        std::cout << "LifeVSimulator::initialize_simulation creating fe spaces" << std::endl;
 
     // Defining finite elements standard and ET spaces
     M_uFESpace.reset( new FESpace_Type ( M_localMeshPtr, (*M_dataFile)( "finite_element/degree", "P1" ), 1, M_comm ) );

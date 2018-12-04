@@ -15,7 +15,6 @@
 
 int main ( int argc, char** argv )
 {
-    std::cout << "Entering load lifev example " << std::endl;
     // MPI initialization
 #ifdef HAVE_MPI
     MPI_Init ( &argc, &argv );
@@ -23,8 +22,6 @@ int main ( int argc, char** argv )
 #else
     Epetra_Comm * my_comm ( new Epetra_SerialComm );
 #endif
-
-    std::cout << "Declaring FemSpecifics " << std::endl;
 
     PyOrbLifeV::FemSpecifics my_fem_specs;
 
@@ -38,8 +35,6 @@ int main ( int argc, char** argv )
     double parameter[3] = { 1.5, 2.5, 3.5 };
 
     int computed_dimension = PyOrbLifeV::solve_parameter( parameter, my_fem_specs, true );
-
-    std::cout << "Computed dimension is " << computed_dimension << std::endl;
 
     my_fem_specs.u = new double[computed_dimension];
 

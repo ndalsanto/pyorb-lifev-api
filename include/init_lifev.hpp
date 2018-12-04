@@ -79,6 +79,7 @@ public:
 
     // members to initialize LifeV
     std::shared_ptr< Epetra_Comm >                      M_comm;
+    bool                                                M_verbose;
 
     // members to initialize a LifeV simulation
     std::shared_ptr<GetPot>                                           M_dataFile;
