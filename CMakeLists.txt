@@ -26,14 +26,14 @@ SET( LINKED_LIBRARIES_DIRS
     )
 
 SET( LINKED_LIBRARIES
-     libmpi.so
-     libmpi_cxx.so
-     liblifevcore.so
-     liblifeveta.so
-     libepetra.so
-     libepetraext.so
-     libteuchoscore.so
-     libhdf5.so
+     mpi
+     mpi_cxx
+     lifevcore
+     lifeveta
+     epetra
+     epetraext
+     teuchoscore
+     hdf5
       )
 
 include_directories( ${INCLUDED_HEADERS} )
@@ -44,6 +44,5 @@ add_subdirectory(sources)
 
 add_library(pyorb-lifev-api SHARED ${SOURCE_FILES} )
 target_link_libraries(pyorb-lifev-api ${LINKED_LIBRARIES} )
-
 
 add_subdirectory(examples)
