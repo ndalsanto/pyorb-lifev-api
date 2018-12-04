@@ -27,12 +27,13 @@ namespace PyOrbLifeV
 class FemSpecifics
 {
 public:
-      char * model;
-      char * datafile_path;
-      MPI_Comm * external_communicator;
-      double * u;
-      double * A;
-      double * f;
+
+    char * model;
+    const char * datafile_path;
+    MPI_Comm * external_communicator;
+    double * u;
+    double * A;
+    double * f;
 };
 
 class LifeVSimulator

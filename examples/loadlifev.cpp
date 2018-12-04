@@ -14,8 +14,6 @@
 
 int main ( int argc, char** argv )
 {
-    std::cout << "Entering load lifev example " << std::endl;
-    // MPI initialization
 #ifdef HAVE_MPI
     MPI_Init ( &argc, &argv );
     MPI_Comm * my_comm ( new MPI_Comm ( MPI_COMM_WORLD ) );
@@ -23,23 +21,14 @@ int main ( int argc, char** argv )
     Epetra_Comm * my_comm ( new Epetra_SerialComm );
 #endif
 
-    std::cout << "Declaring FemSpecifics " << std::endl;
-
     PyOrbLifeV::FemSpecifics my_fem_specs;
 
-    char * model = nullptr;
-    char datafile_path[13] = {'e', 'x', 'a', 'm', 'p', 'l', 'e', 's', '/', 'd', 'a', 't', 'a' };
-    MPI_Comm * external_communicator = my_comm;
-    double * u = nullptr;
-    double * A = nullptr;
-    double * f = nullptr;
-
-    my_fem_specs.model = model;
-    my_fem_specs.datafile_path = datafile_path;
-    my_fem_specs.external_communicator = external_communicator;
-    my_fem_specs.u = u;
-    my_fem_specs.A = A;
-    my_fem_specs.f = f;
+    my_fem_specs.model = "";
+    my_fem_specs.datafile_path = "examples/data";
+    my_fem_specs.external_communicator = my_comm;
+    my_fem_specs.u = nullptr;
+    my_fem_specs.A = nullptr;
+    my_fem_specs.f = nullptr;
 
     PyOrbLifeV::LifeVSimulator my_lifev_simulator;
 
