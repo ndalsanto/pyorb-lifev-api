@@ -28,7 +28,7 @@ class FemSpecifics
 {
 public:
 
-    char * model;
+    const char * model;
     const char * datafile_path;
     MPI_Comm * external_communicator;
     double * u;

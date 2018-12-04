@@ -43,7 +43,7 @@ int main ( int argc, char** argv )
 
     my_lifev_simulator.finalize( );
 
-    return ( 0 );
+    delete my_comm;
 
     if( residual < 1.e-5 )
     {
