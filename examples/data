@@ -4,25 +4,17 @@
 #-------------------------------------------------
 
 [finite_element]
-    degree                       = P1
+    degree    = P1
 
 [mesh]
-    mesh_dir					 = ./examples/
-    mesh_file       			 = 4cube1.mesh
-    mesh_type       			 = .mesh
-    overlap                      = 0
-    verbose                      = false
-
-[../physicalParameters]
-    numSubregions				 = 4
-	mu1 						 = 1.3
-	mu2 						 = 5.4
-	mu3 						 = 15.3
-	mu4 						 = 12.2
+    mesh_dir  = ./examples/
+    mesh_file = 4cube1.mesh
+    mesh_type = .mesh
+    overlap   = 0
+    verbose   = false
 
 [../solver]
     param_list_location = ./examples/SolverParamList.xml
-
 
 [../prec]
     prectype                     = Ifpack # Ifpack or ML
@@ -46,5 +38,5 @@
             reordering_type      = none #metis, rcm, none
             filter_singletons    = true
 
-		[../]
+    [../]
 [../]
