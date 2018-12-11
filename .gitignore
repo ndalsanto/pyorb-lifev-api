@@ -3,3 +3,4 @@
 *.tcl
 Makefile
 *CMakeCache.txt
+build/
