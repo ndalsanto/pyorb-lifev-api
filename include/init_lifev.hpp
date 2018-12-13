@@ -56,6 +56,8 @@ public:
 
     int get_fem_dimension( );
 
+    int applyBC( );
+
     std::shared_ptr< LifeV::MatrixEpetra< LifeV::Real > > get_stiffness( )
     {
         return M_A;
