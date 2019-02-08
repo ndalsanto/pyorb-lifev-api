@@ -41,22 +41,15 @@ int main ( int argc, char** argv )
 
     double residual = my_lifev_simulator.compute_residual( );
 
+    std::cout << "Norm of residual " << residual << std::endl;
+
     my_lifev_simulator.finalize( );
 
     delete my_comm;
 
-    if( residual < 1.e-5 )
-    {
 #ifdef HAVE_MPI
         MPI_Finalize();
 #endif
-        return ( 0 );
-    }
-    else
-    {
-#ifdef HAVE_MPI
-        MPI_Finalize();
-#endif
-        return ( EXIT_FAILURE );
-    }
+
+    return ( 0 );
 }

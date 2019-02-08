@@ -40,27 +40,9 @@ int main ( int argc, char** argv )
 
     PyOrbLifeV::solve_parameter( parameter, my_fem_specs, false );
 
-    double * u = my_fem_specs.u;
-    double norm2( 0. );
-
-    for( int ii(0); ii < computed_dimension; ++ii )
-        norm2 += u[ii] * u[ii];
-
-    std::cout << "Squared norm of solution is " << norm2 << std::endl;
-
-    // check on the norm of the solution
-    if( std::abs( norm2 - 0.784939 ) < 1.e-4 )
-    {
 #ifdef HAVE_MPI
         MPI_Finalize();
 #endif
-        return ( EXIT_SUCCESS );
-    }
-    else
-    {
-#ifdef HAVE_MPI
-        MPI_Finalize();
-#endif
-        return ( EXIT_FAILURE );
-    }
+
+    return 0;
 }
